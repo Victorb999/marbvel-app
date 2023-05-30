@@ -36,7 +36,7 @@ const Characters = (): JSX.Element => {
       placeholder="Type a name caracter" 
       onChange={(e) => handlerCharacter(e)}/>
 
-      <div className="flex min-h-screen flex-row flex-wrap gap-4 justify-center items-center">
+      <div className="flex flex-row flex-wrap gap-4 justify-center items-center pt-4">
         {data?.total === 0 ? (
           <div data-testid="noFoudError" className="flex justify-center items-center text-gray-100 font-bold text-md">No characters found</div>
         ) :
@@ -47,8 +47,8 @@ const Characters = (): JSX.Element => {
                 className="rounded-t-md"
                 src={`${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`}
                 alt={character.name} width={150} height={225}/>
-              <div className="flex justify-center items-center h-10">
-                <h1 className="text-gray-100 font-bold text-xs">{character.name}</h1>
+              <div className="flex justify-center items-center h-10 w-full">
+                <h1 className="text-gray-100 font-bold text-xs truncate" title={character.name}>{character.name}</h1>
               </div>
             </div>
           )

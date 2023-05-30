@@ -15,7 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={`flex justify-center items-center flex-col ${montserrat.className}`}>
+        <div className="flex justify-center items-center bg-red-600 w-full h-16">
+          <h1 className="text-white uppercase text-2xl tracking-wide font-black">Marvel App</h1>
+        </div>
+        {children}
+      </body>
     </html>
   )
 }
