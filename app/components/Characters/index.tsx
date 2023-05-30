@@ -31,24 +31,30 @@ const Characters = (): JSX.Element => {
   
   return (
     <>
-    <input type='text' 
-    className="p-2 mb-4 rounded-sm outline-none"
-    placeholder="Type a name caracter" 
-    onChange={(e) => handlerCharacter(e)}/>
+      <input type='text' 
+      className="p-2 mb-4 rounded-sm outline-none bg-neutral-800"
+      placeholder="Type a name caracter" 
+      onChange={(e) => handlerCharacter(e)}/>
 
-    <div className="flex min-h-screen flex-row flex-wrap gap-2">
-      {data?.results.map(character => {
-        return (
-          <div key={character.id} className="flex justify-center items-center flex-col w-48 rounded-md p-2">
-            <h1 className="text-gray-900 font-bold text-xs mb-2">{character.name}</h1>
-            <Image
-              className="rounded-md"
-              src={`${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`}
-              alt={character.name} width={150} height={225} />
-          </div>
-        )
-      })}
-    </div></>
+      <div className="flex min-h-screen flex-row flex-wrap gap-4 justify-center items-center">
+        {data?.total === 0 ? (
+          <div data-testid="noFoudError" className="flex justify-center items-center text-gray-100 font-bold text-md">No characters found</div>
+        ) :
+        data?.results.map(character => {
+          return (
+            <div key={character.id} className="bg-neutral-800 flex justify-center items-center flex-col w-32 rounded-md">
+              <Image
+                className="rounded-t-md"
+                src={`${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`}
+                alt={character.name} width={150} height={225}/>
+              <div className="flex justify-center items-center h-10">
+                <h1 className="text-gray-100 font-bold text-xs">{character.name}</h1>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </>
   )
 }
 
