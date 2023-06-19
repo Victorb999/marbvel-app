@@ -43,3 +43,24 @@ export const getCharacters = async (
     return character
   }
 }
+
+export const getCharacter = async (
+  idCharacter: number ,
+): Promise<CharacterData> => {
+  try {
+    const { data } = await api.get(
+      `characters/${idCharacter}?${paramRequest()}`,
+    )
+    return data.data
+  } catch (error) {
+    console.error(error)
+    const character = {
+      offset: 0,
+      limit: 0,
+      total: 0,
+      count: 0,
+      results: [],
+    }
+    return character
+  }
+}

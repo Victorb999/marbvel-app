@@ -6,6 +6,7 @@ import { useEffect, useState, ChangeEvent } from 'react'
 
 const Characters = (): JSX.Element => {
   const [nameCharacter, setNameCaracter] = useState('')
+  const [loading, setLoading] = useState(true)
   const [data, setData] = useState<CharacterData | undefined>(undefined)
 
   const handlerCharacter = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -22,6 +23,8 @@ const Characters = (): JSX.Element => {
         setData(dataCharacter)
       } catch (error) {
         console.log('Error fetching data: ', error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchData()
@@ -37,6 +40,7 @@ const Characters = (): JSX.Element => {
       />
 
       <div className="flex flex-row flex-wrap gap-4 justify-center items-center pt-4">
+        {loading && <div> loading ...</div>}
         {data?.total === 0 ? (
           <div
             data-testid="noFoudError"
@@ -47,8 +51,9 @@ const Characters = (): JSX.Element => {
         ) : (
           data?.results.map((character) => {
             return (
-              <div
+              <a
                 key={character.id}
+                href={`/${character.id}`}
                 className="bg-neutral-800 flex justify-center items-center flex-col w-32 rounded-md"
               >
                 <Image
@@ -66,7 +71,7 @@ const Characters = (): JSX.Element => {
                     {character.name}
                   </h1>
                 </div>
-              </div>
+              </a>
             )
           })
         )}
