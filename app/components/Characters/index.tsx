@@ -1,33 +1,31 @@
-"use client";
-import { getCharacters } from "@/app/services/api";
-import { CharacterData } from "@/app/services/types";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+'use client'
+import { getCharacters } from '@/app/services/api'
+import { CharacterData } from '@/app/services/types'
+import Image from 'next/image'
+import { useEffect, useState, ChangeEvent } from 'react'
 
 const Characters = (): JSX.Element => {
-  const [nameCharacter, setNameCaracter] = useState("");
-  const [data, setData] = useState<CharacterData | undefined>(undefined);
+  const [nameCharacter, setNameCaracter] = useState('')
+  const [data, setData] = useState<CharacterData | undefined>(undefined)
 
-  const handlerCharacter = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const inputValue: string = event.target.value;
+  const handlerCharacter = (event: ChangeEvent<HTMLInputElement>): void => {
+    const inputValue: string = event.target.value
     if (inputValue.length > 3) {
-      setNameCaracter(inputValue);
+      setNameCaracter(inputValue)
     }
-  };
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dataCharacter = await getCharacters(nameCharacter);
-        setData(dataCharacter);
+        const dataCharacter = await getCharacters(nameCharacter)
+        setData(dataCharacter)
       } catch (error) {
-        console.log("Error fetching data: ", error);
+        console.log('Error fetching data: ', error)
       }
-    };
-    fetchData();
-  }, [nameCharacter]);
+    }
+    fetchData()
+  }, [nameCharacter])
 
   return (
     <>
@@ -69,12 +67,12 @@ const Characters = (): JSX.Element => {
                   </h1>
                 </div>
               </div>
-            );
+            )
           })
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Characters;
+export default Characters
